@@ -880,11 +880,11 @@ In Python, a type of object gets operations that belong to that type. Sequences 
 You can ask what the length of any sequence is
 
 ```python
->>>len('ACGTGA') # length of a string
+>>> len('ACGTGA') # length of a string
 6
->>>len( (0.23, 9.74, -8.17, 3.24, 0.16) )   # length of a tuple, needs two parentheses (( ))
+>>> len( (0.23, 9.74, -8.17, 3.24, 0.16) )   # length of a tuple, needs two parentheses (( ))
 5
->>>len(['dog', 'cat', 'bird'])  # length of a list
+>>> len(['dog', 'cat', 'bird'])  # length of a list
 3
 ```
 
@@ -1430,7 +1430,7 @@ What is the 'list' in `s.join(list)` ?
 Let's take a list of expression values and create a tab delimited string that will open nicely in a spreadsheet with each value in its own column:
 ```python
 >>> expression_values = ['4.73', '7.91', '3.65']
->>>expression_values
+>>> expression_values
 ['4.73', '7.91', '3.65']
 >>> expression_value_string = '\t'.join(expression_values)
 >>> expression_value_string
@@ -1442,15 +1442,25 @@ Let's take a list of expression values and create a tab delimited string that wi
 
 ## String Formatting
 
-Strings can be formated using new f-strings  `f''`, `f""` and `f'''`
+Strings can be formated using new f-strings  `f''`, `f""` and `f''''''`
 
  `'''`. That last one is the triple quote multiline string. For example, if you want to include literal stings and variables in your print statement and do not want to concatenate or use multiple arguments in the `print()` function you can use string formatting.
 
 ```python
+>>> dna = 'TGAACATCTAAAAGATGAAGTTT'
+>>> dna_len = len(dna)
+>>> gene_name = 'Brca1'
 >>> f'This sequence: {dna} is {dna_len} nucleotides long and is found in {gene_name}.'
 'This sequence: TGAACATCTAAAAGATGAAGTTT is 23 nucleotides long and is found in Brca1.'
+>>> f"This sequence: {dna} is {dna_len} nucleotides long and is found in {gene_name}."
+'This sequence: TGAACATCTAAAAGATGAAGTTT is 23 nucleotides long and is found in Brca1.'
+>>> f'''This sequence: {dna} is {dna_len} nucleotides long and is found in {gene_name}.'''
+'This sequence: TGAACATCTAAAAGATGAAGTTT is 23 nucleotides long and is found in Brca1.'
+>>> f"""This sequence: {dna} is {dna_len} nucleotides long and is found in {gene_name}."""
+'This sequence: TGAACATCTAAAAGATGAAGTTT is 23 nucleotides long and is found in Brca1.'
 ```
-We put together the three variables and literal strings into a single string using f-strings. A new string is returned that incorporates the arguments. You can save the returned value in a new variable. Each `{}` is a placeholder for the variable that needs to be inserted. 
+
+We can combine variables and literal strings into a single string using f-strings. The newly created string incorporates the arguments. You can save the returned value in a new variable. Each `{}` is a placeholder for the variable that needs to be inserted. 
 
 Something very nice about f-strings is that you can print int and string variable types without converting first.
 
@@ -1460,20 +1470,22 @@ You will often put f-strings inside print functions.
 >>> print(f'This sequence: {dna} is {dna_len} nucleotides long and is found in {gene_name}.')
 This sequence: TGAACATCTAAAAGATGAAGTTT is 23 nucleotides long and is found in Brca1.
 ```
-There is an older function `format()` that is similar, but not as concise. Here's an example in case you see one in older code:
+
+There is also a string method `str.format()` that is similar, but not as concise. Here's an example in case you see one in older code:
+
 ```python
->>> print( "This sequence: {} is {} nucleotides long and is found in {}.".format(dna,dna_len,gene_name))
+>>> print("This sequence: {} is {} nucleotides long and is found in {}.".format(dna, dna_len, gene_name))
 This sequence: TGAACATCTAAAAGATGAAGTTT is 23 nucleotides long and is found in Brca1.
 ```
+
 ### The f-string mini-language
 
 So far, we have just used `{}` to show where to insert the value of a variable in a string. You can add special characters inside the `{}` to change the way the variable is formatted when it's inserted into the string. 
 
-Lets right justify some numbers.  
+Lets right-justify some numbers. In the following example, the numbers we want to print (2, 20, 200) are followed by characters after a colon that define the formatting, e.g. `:>5` to right-justify with a minimum field width of five characters:
 
 ```python
->>> print( f"{2:>5}" )   # 2 is the number we want to print, the characters after the colon define
-                         # the formatting e.g. > for right justify 5 for min field width
+>>> print( f"{2:>5}" )   
     2
 >>> print( f"{20:>5}" )
    20
@@ -1498,6 +1510,7 @@ Use a `<` to indicate left-justification.
 >>> print( f"{200:<5} genes" )
 200   genes
 ```
+
 Center aligning is done with `^` instead of `>` or `<`. You can also pad with characters other than 0. Here let's try `_` or underscore as in `:_^`. The fill symbol goes before the alignment symbol.
 ```python
 >>> print( f"{2:_^10}" )
